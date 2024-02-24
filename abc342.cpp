@@ -1,16 +1,17 @@
+// Copyright
+
 #include <bits/stdc++.h>
 
-void A(void) {
+void A_Yay(void) {
   std::string S;
   std::cin >> S;
 
   char trg = S[0];
-  for (int i = 1; i < int(S.size()); ++i) {
+  for (int i = 1; i < static_cast<int>(S.size()); ++i) {
     if (S[i] != trg) {
       if (i == 1 && S[i] == S[i + 1]) {
         std::cout << 1 << std::endl;
-      }
-      else {
+      } else {
         std::cout << i + 1 << std::endl;
       }
       break;
@@ -18,7 +19,7 @@ void A(void) {
   }
 }
 
-void B(void) {
+void B_Which_is_ahead(void) {
   int N;
   std::cin >> N;
 
@@ -36,15 +37,13 @@ void B(void) {
     std::cin >> A >> B;
     if (my_order[A - 1] < my_order[B - 1]) {
       std::cout << A << std::endl;
-    }
-    else {
+    } else {
       std::cout << B << std::endl;
     }
   }
 }
 
 void C(void) {
-
   int N;
   std::cin >> N;
 
@@ -64,31 +63,26 @@ void C(void) {
     std::cin >> c >> d;
     c -= 'a';
     d -= 'a';
-    for (int& r : replaced_to) {
-      if (r == c) {
-        r = d;
-      }
-    }
+    std::replace_if(replaced_to.begin(), replaced_to.end(),
+    [c](int x) { return x == c; }, d);
   }
 
-  for (char& c : S) {
-    c = 'a' + replaced_to[c - 'a'];
-  }
+  std::transform(S.begin(), S.end(), S.begin(),
+  [&replaced_to](char c) { return 'a' + replaced_to[c - 'a']; });
 
   std::cout << S << std::endl;
 }
 
 void D(void) {
-
   int N;
-  std::cin >> N; 
+  std::cin >> N;
   std::vector<int> A(N);
-  for (int& a : A) {
+  for (int &a : A) {
     std::cin >> a;
   }
 
   for (int i = 2; i < 500; ++i) {
-    for (int& a : A) {
+    for (int &a : A) {
       while (a > 0 && a % (i * i) == 0) {
         a /= i * i;
       }
@@ -100,10 +94,9 @@ void D(void) {
     ++count[a];
   }
 
-  long long int ans = 0;
-  for (int c : count) {
-    ans += (long long int) c * ((long long int) c - 1) / 2;
-  }
+  uint64_t ans = 0;
+  std::accumulate(count.begin(), count.end(), 0,
+  [&ans](int c) { ans += (uint64_t) c * ((uint64_t) c - 1) / 2; });
   ans += count[0] * (N - count[0]);
   std::cout << ans << std::endl;
 }
