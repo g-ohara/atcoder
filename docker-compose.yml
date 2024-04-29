@@ -1,11 +1,7 @@
 services:
   gcc:
-    image: genjiohara/gcc
-    container_name: AtCoder
+    image: gcc:12.2
     volumes:
-      - ./:/root/workspace
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    environment:
-      - DISPLAY=$DISPLAY
-    working_dir: /root/workspace
-    tty: true
+      - ./:/usr/src/myapp
+    working_dir: /usr/src/myapp
+    command: bash -c "g++ -std=c++23 -Wall -o main main.cc && ./main"
