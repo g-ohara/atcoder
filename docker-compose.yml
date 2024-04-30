@@ -1,7 +1,14 @@
 services:
+  clangd:
+    image: lspcontainers/clangd-language-server
+    container_name: atcoder
+    volumes:
+      - ./:${PWD}
+    working_dir: ${PWD}
+    tty: true
   gcc:
     image: gcc:12.2
     volumes:
-      - ./:/usr/src/myapp
-    working_dir: /usr/src/myapp
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
     command: bash -c "g++ -std=c++23 -Wall -o main main.cc && ./main"
