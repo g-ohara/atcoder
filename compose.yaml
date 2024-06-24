@@ -1,7 +1,7 @@
 services:
   clangd:
     image: lspcontainers/clangd-language-server
-    container_name: atcoder
+    container_name: atcoder-clangd
     volumes:
       - ./:${PWD}
     working_dir: ${PWD}
