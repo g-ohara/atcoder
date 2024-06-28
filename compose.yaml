@@ -1,11 +1,8 @@
 services:
   clangd:
-    image: lspcontainers/clangd-language-server
-    container_name: atcoder-clangd
-    volumes:
-      - ./:${PWD}
-    working_dir: ${PWD}
-    tty: true
+    extends:
+      file: ${HOME}/compose.yaml
+      service: clangd
   gcc:
     image: gcc:12.2
     volumes:
